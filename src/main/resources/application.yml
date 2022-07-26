@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/MYPROJECT
+    username: MYPROJECT
+    password: MYPROJECT
+
+    hikari:
+      minimumIdle: 10
+      maximumPoolSize: 30
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        temp:
+          use_jdbc_metadata_defaults: false
+
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://${auth0.domain}/
+
+auth0:
+  audience: MYPROJECT
+  domain: MYPROJECT
+  manage:
+    clientId: MYPROJECT
+    secret: MYPROJECT
+
